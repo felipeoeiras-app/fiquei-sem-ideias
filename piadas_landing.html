@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PiadaTop – Piadas que Fazem Rir de Verdade</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --yellow: #FFD60A;
+  --orange: #FF6B2C;
+  --blue: #3EC9F5;
+  --pink: #FF4DAA;
+  --purple: #9B5DE5;
+  --dark: #1A1A2E;
+  --white: #FFFDF7;
+  --card-bg: #FFFFFF;
+  --radius: 20px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--white);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ─── UTILITY ─── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.btn {
+  display: inline-block;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.15rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 28px rgba(0,0,0,0.18); }
+.btn-primary { background: var(--orange); color: #fff; }
+.btn-secondary { background: var(--yellow); color: var(--dark); }
+.section-tag {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--dark);
+  font-weight: 800;
+  font-size: .78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 580px;
+  line-height: 1.7;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,253,247,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--yellow);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+.logo {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.7rem;
+  color: var(--dark);
+  text-decoration: none;
+}
+.logo span { color: var(--orange); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--dark); font-weight: 700; font-size: .97rem; transition: color .2s; }
+.nav-links a:hover { color: var(--orange); }
+.nav-cta { display: flex; gap: 12px; align-items: center; }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  background: linear-gradient(135deg, #FFF8D6 0%, #FFDBB5 40%, #D9F6FF 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: .35;
+}
+.blob1 { width: 480px; height: 480px; background: var(--yellow); top: -120px; left: -80px; }
+.blob2 { width: 350px; height: 350px; background: var(--blue); bottom: -100px; right: -60px; }
+.blob3 { width: 220px; height: 220px; background: var(--pink); top: 200px; right: 180px; }
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--dark);
+  color: var(--yellow);
+  font-weight: 800;
+  font-size: .82rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-bottom: 22px;
+}
+.hero-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+  line-height: 1.08;
+  margin-bottom: 22px;
+}
+.hero-title .highlight {
+  color: var(--orange);
+  position: relative;
+  display: inline-block;
+}
+.hero-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 0; right: 0;
+  height: 6px;
+  background: var(--yellow);
+  border-radius: 4px;
+  z-index: -1;
+}
+.hero-sub {
+  font-size: 1.15rem;
+  color: #444;
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.hero-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: floatUp 3s ease-in-out infinite alternate;
+}
+@keyframes floatUp { from { transform: translateY(0); } to { transform: translateY(-14px); } }
+
+.joke-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  box-shadow: var(--shadow);
+  border-left: 6px solid var(--orange);
+  font-size: 1rem;
+  line-height: 1.6;
+  position: relative;
+}
+.joke-card.alt { border-left-color: var(--blue); transform: translateX(24px); }
+.joke-card.sm { border-left-color: var(--pink); transform: translateX(-12px); font-size: .95rem; }
+.joke-card .punchline { font-weight: 800; color: var(--orange); margin-top: 8px; display: block; }
+.joke-card .punchline.alt { color: var(--blue); }
+.joke-emoji { font-size: 1.5rem; margin-bottom: 6px; display: block; }
+.joke-tag {
+  font-size: .7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #aaa;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* ─── STATS ─── */
+#stats {
+  background: var(--dark);
+  padding: 60px 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Fredoka One', cursive;
+  font-size: 3rem;
+  color: var(--yellow);
+  line-height: 1;
+}
+.stat-label { color: #ccc; font-size: .95rem; margin-top: 6px; }
+
+/* ─── VANTAGENS ─── */
+#vantagens { padding: 100px 0; background: var(--white); }
+.vantagens-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 56px;
+}
+.vantagem-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--yellow);
+  transition: transform .25s, box-shadow .25s;
+}
+.vantagem-card:nth-child(2) { border-top-color: var(--orange); }
+.vantagem-card:nth-child(3) { border-top-color: var(--blue); }
+.vantagem-card:nth-child(4) { border-top-color: var(--pink); }
+.vantagem-card:nth-child(5) { border-top-color: var(--purple); }
+.vantagem-card:nth-child(6) { border-top-color: var(--orange); }
+.vantagem-card:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(0,0,0,0.15); }
+.vantagem-icon { font-size: 2.6rem; margin-bottom: 16px; display: block; }
+.vantagem-title { font-family: 'Fredoka One', cursive; font-size: 1.3rem; margin-bottom: 10px; }
+.vantagem-text { font-size: .97rem; color: #666; line-height: 1.65; }
+
+/* ─── MOTIVOS ─── */
+#motivos {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #FFF8D6 0%, #FFE8C2 100%);
+}
+.motivos-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+.motivos-list { list-style: none; display: flex; flex-direction: column; gap: 22px; margin-top: 36px; }
+.motivo-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+.motivo-bullet {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.motivo-text strong { font-weight: 800; display: block; margin-bottom: 3px; }
+.motivo-text span { font-size: .95rem; color: #666; }
+
+.motivos-visual {
+  background: var(--dark);
+  border-radius: 28px;
+  padding: 40px 36px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.motivos-visual .mv-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.6rem;
+  color: var(--yellow);
+  text-align: center;
+}
+.mood-bar { display: flex; flex-direction: column; gap: 10px; }
+.mood-row { display: flex; align-items: center; gap: 14px; }
+.mood-label { font-size: .9rem; color: #ccc; width: 130px; flex-shrink: 0; }
+.mood-track { flex: 1; background: rgba(255,255,255,.1); border-radius: 50px; height: 12px; overflow: hidden; }
+.mood-fill { height: 100%; border-radius: 50px; animation: fillBar 1.5s ease forwards; }
+@keyframes fillBar { from { width: 0; } }
+.f-orange { background: var(--orange); }
+.f-yellow { background: var(--yellow); }
+.f-blue { background: var(--blue); }
+.f-pink { background: var(--pink); }
+.mood-pct { font-weight: 800; font-size: .9rem; color: #fff; width: 36px; text-align: right; }
+
+/* ─── CLIENTES ─── */
+#clientes { padding: 100px 0; background: var(--white); }
+.depoimentos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 56px;
+}
+.depoimento-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+.depoimento-card::before {
+  content: '"';
+  font-family: 'Fredoka One', cursive;
+  font-size: 6rem;
+  color: var(--yellow);
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  line-height: 1;
+  opacity: .5;
+}
+.dep-stars { color: #FFD60A; font-size: 1.1rem; }
+.dep-text { font-size: 1rem; color: #444; line-height: 1.7; font-style: italic; margin-top: 8px; }
+.dep-user { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
+.dep-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.av-yellow { background: #FFF3BF; }
+.av-orange { background: #FFE5D5; }
+.av-blue { background: #D4F4FF; }
+.av-pink { background: #FFD6ED; }
+.av-purple { background: #EFE0FF; }
+.av-green { background: #D5F5E3; }
+.dep-name { font-weight: 800; font-size: .97rem; }
+.dep-role { font-size: .82rem; color: #aaa; }
+
+/* ─── SOCIAL ─── */
+#social {
+  padding: 90px 0;
+  background: linear-gradient(135deg, var(--purple) 0%, #FF4DAA 100%);
+  text-align: center;
+  color: #fff;
+}
+#social .section-title { color: #fff; }
+#social .section-sub { color: rgba(255,255,255,.85); margin: 0 auto 40px; }
+.social-icons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,.18);
+  border: 2px solid rgba(255,255,255,.4);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+.social-btn:hover { background: rgba(255,255,255,.3); transform: translateY(-3px); }
+.social-icon { font-size: 1.3rem; }
+.viral-tag {
+  background: var(--yellow);
+  color: var(--dark);
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  padding: 12px 32px;
+  border-radius: 50px;
+  display: inline-block;
+}
+
+/* ─── CONTATO + FORM ─── */
+#contato { padding: 100px 0; background: var(--white); }
+.contato-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+.contato-info { display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+.contato-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+.contato-ico {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.contato-item strong { font-weight: 800; display: block; margin-bottom: 3px; }
+.contato-item span { font-size: .95rem; color: #666; }
+
+.form-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 44px 40px;
+  box-shadow: var(--shadow);
+  border-top: 6px solid var(--orange);
+}
+.form-card h3 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+.form-card p { color: #777; font-size: .97rem; margin-bottom: 28px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-weight: 800; font-size: .9rem; margin-bottom: 7px; color: var(--dark); }
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 2px solid #E8E8E8;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  color: var(--dark);
+  transition: border-color .2s;
+  outline: none;
+  background: #FAFAFA;
+}
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--orange); background: #fff; }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.btn-submit {
+  width: 100%;
+  padding: 18px;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  margin-top: 8px;
+}
+.btn-submit:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(255,107,44,.35); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--dark);
+  color: #ccc;
+  padding: 50px 0 30px;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2rem;
+  color: var(--yellow);
+  margin-bottom: 12px;
+}
+.footer-logo span { color: var(--orange); }
+footer p { font-size: .9rem; color: #777; margin-top: 20px; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+.pulse { animation: pulse 2.5s ease-in-out infinite; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero-inner, .motivos-inner, .contato-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .vantagens-grid, .depoimentos-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: 2fr 2fr; gap: 20px; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .vantagens-grid, .depoimentos-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">Piada<span>Top</span> 😂</a>
+    <ul class="nav-links">
+      <li><a href="#vantagens">Vantagens</a></li>
+      <li><a href="#motivos">Por que usar?</a></li>
+      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#contato" class="btn btn-primary">Quero Rir Agora 🎉</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-blob blob3"></div>
+  <div class="container hero-inner">
+    <div>
+      <div class="hero-badge">🏆 #1 em Piadas de Verdade</div>
+      <h1 class="hero-title">
+        Piadas que fazem você rir <span class="highlight">de verdade</span> — não só sorrir por educação
+      </h1>
+      <p class="hero-sub">
+        Chega de piadas requentadas do seu tio nas festas de fim de ano. O <strong>PiadaTop</strong> gera humor fresco, criativo e personalizado — do tipo que faz leite sair pelo nariz. 🥛😂
+      </p>
+      <div class="hero-btns">
+        <a href="#contato" class="btn btn-primary pulse">Gerar Minha Primeira Piada 🎯</a>
+        <a href="#vantagens" class="btn btn-secondary">Como funciona? 👀</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="joke-card">
+        <span class="joke-emoji">😂</span>
+        <span class="joke-tag">IA gerada • Estilo: Inteligente</span>
+        Por que o escrevi isso.... <br>
+        <span class="punchline">Porque eu esqueci kkkkkkkkk</span>
+      </div>
+      <div class="joke-card alt">
+        <span class="joke-emoji">🤣</span>
+        <span class="joke-tag">IA gerada • Estilo: Absurdo</span>
+        Qual é o animal mais literário?
+        <span class="punchline alt">O livro-gato — só ronrona quando a história é boa.</span>
+      </div>
+      <div class="joke-card sm">
+        <span class="joke-emoji">😆</span>
+        <span class="joke-tag">IA gerada • Estilo: Cotidiano</span>
+        Minha academia me deu um cupom de desconto…
+        <span class="punchline">…para o mês que eu nunca vou usar mesmo.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS ─── -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-num">+2M</div>
+        <div class="stat-label">piadas geradas 🎭</div>
+      </div>
+      <div>
+        <div class="stat-num">98%</div>
+        <div class="stat-label">usuários riram (os 2% restantes eram robôs)</div>
+      </div>
+      <div>
+        <div class="stat-num">12+</div>
+        <div class="stat-label">estilos de humor disponíveis 🎨</div>
+      </div>
+      <div>
+        <div class="stat-num">0</div>
+        <div class="stat-label">piadas do tipo "por que o frango atravessou..." 🚫🐔</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VANTAGENS ─── -->
+<section id="vantagens">
+  <div class="container">
+    <div style="text-align:center; max-width:600px; margin:0 auto;">
+      <span class="section-tag">✨ Vantagens</span>
+      <h2 class="section-title">Por que o PiadaTop é diferente de tudo que você já viu</h2>
+      <p class="section-sub">Não somos mais uma máquina de copiar piadas da internet. Somos o<em> engenheiro do riso</em> que você precisava.</p>
+    </div>
+    <div class="vantagens-grid">
+      <div class="vantagem-card">
+        <span class="vantagem-icon">⚡</span>
+        <div class="vantagem-title">Velocidade Cômica</div>
+        <p class="vantagem-text">Piada pronta em menos de 3 segundos. Mais rápido do que você pensar em uma desculpa para o atraso no trabalho.</p>
+      </div>
+      <div class="vantagem-card">
+        <span class="vantagem-icon">🎨</span>
+        <div class="vantagem-title">Humor Personalizado</div>
+        <p class="vantagem-text">Você escolhe o estilo — inteligente, absurdo, irônico, família, nerd, adulto (para os adultos, claro). A piada veste como uma luva.</p>
+      </div>
+      <div class="vantagem-card">
+        <span class="vantagem-icon">🤖</span>
+        <div class="vantagem-title">IA Anti-Tédio</div>
+        <p class="vantagem-text">Nosso modelo é treinado para reconhecer e banir piadas velhas, requentadas e sem graça. Zero repetição, 100% originalidade.</p>
+      </div>
+      <div class="vantagem-card">
+        <span class="vantagem-icon">🌍</span>
+        <div class="vantagem-title">Temas Infinitos</div>
+        <p class="vantagem-text">Tecnologia, amor, pets, trabalho, família, política (moderada), esportes, alimentação... se existe no mundo, temos piada sobre isso.</p>
+      </div>
+      <div class="vantagem-card">
+        <span class="vantagem-icon">📱</span>
+        <div class="vantagem-title">Use em Qualquer Lugar</div>
+        <p class="vantagem-text">Web, app mobile e integração via API. Jogue no grupo da família, no Slack do trabalho ou mande para aquela crush 😏.</p>
+      </div>
+      <div class="vantagem-card">
+        <span class="vantagem-icon">🏆</span>
+        <div class="vantagem-title">Qualidade Garantida</div>
+        <p class="vantagem-text">Classificação de qualidade em tempo real. Se a piada não for boa, geramos outra. Não descansamos até você rir — ou pelo menos sorrir de canto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MOTIVOS ─── -->
+<section id="motivos">
+  <div class="container">
+    <div class="motivos-inner">
+      <div>
+        <span class="section-tag">💡 Motivos</span>
+        <h2 class="section-title">Rir é sério. E nós levamos isso a sério.</h2>
+        <p class="section-sub">Parece contraditório, mas é verdade: o riso é uma das ferramentas mais poderosas para sua vida social, mental e profissional.</p>
+        <ul class="motivos-list">
+          <li class="motivo-item">
+            <div class="motivo-bullet">1</div>
+            <div class="motivo-text"><strong>Alivia o estresse instantaneamente</strong><span>Uma boa gargalhada reduz o cortisol. É como academia, mas sem precisar de tênis.</span></div>
+          </li>
+          <li class="motivo-item">
+            <div class="motivo-bullet" style="background:var(--blue);">2</div>
+            <div class="motivo-text"><strong>Melhora suas relações sociais</strong><span>Pessoas engraçadas são mais queridas. Fato. O PiadaTop é seu coach de carisma.</span></div>
+          </li>
+          <li class="motivo-item">
+            <div class="motivo-bullet" style="background:var(--pink);">3</div>
+            <div class="motivo-text"><strong>Cria conteúdo viral com facilidade</strong><span>Stories, posts, apresentações no trabalho — humor de qualidade engaja e é compartilhado.</span></div>
+          </li>
+          <li class="motivo-item">
+            <div class="motivo-bullet" style="background:var(--purple);">4</div>
+            <div class="motivo-text"><strong>Quebra o gelo em qualquer situação</strong><span>Reunião tensa? Primeiro encontro? Apresentação para o diretor? Uma piada certa muda o clima.</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="motivos-visual">
+        <div class="mv-title">🎭 Impacto do Riso na Sua Vida</div>
+        <div class="mood-bar">
+          <div class="mood-row">
+            <span class="mood-label">Bom Humor</span>
+            <div class="mood-track"><div class="mood-fill f-yellow" style="width:94%"></div></div>
+            <span class="mood-pct">94%</span>
+          </div>
+          <div class="mood-row">
+            <span class="mood-label">Conexão Social</span>
+            <div class="mood-track"><div class="mood-fill f-orange" style="width:88%"></div></div>
+            <span class="mood-pct">88%</span>
+          </div>
+          <div class="mood-row">
+            <span class="mood-label">Criatividade</span>
+            <div class="mood-track"><div class="mood-fill f-blue" style="width:79%"></div></div>
+            <span class="mood-pct">79%</span>
+          </div>
+          <div class="mood-row">
+            <span class="mood-label">Menos Estresse</span>
+            <div class="mood-track"><div class="mood-fill f-pink" style="width:91%"></div></div>
+            <span class="mood-pct">91%</span>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,.15); padding-top:20px; font-size:.92rem; color:#ccc; text-align:center;">
+          📊 Baseado em pesquisa com +10.000 usuários PiadaTop<br>
+          <span style="font-size:.78rem; opacity:.6;">(e um ou dois cientistas que curtem piadas)</span>
+        </div>
+        <div style="background:var(--yellow); border-radius:14px; padding:18px; text-align:center; color:var(--dark);">
+          <div style="font-family:'Fredoka One',cursive; font-size:1.2rem;">🏆 100% dos usuários</div>
+          <div style="font-size:.9rem; margin-top:4px;">disseram que usariam o PiadaTop de novo.<br><em>Os outros 0% ainda estão rindo e não responderam.</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="clientes">
+  <div class="container">
+    
+    <div class="section-header">
+      <span class="section-tag">💬 Depoimentos</span>
+      <h2 class="section-title">Gente que parou de fingir que as piadas têm graça</h2>
+      <p class="section-sub">
+        Veja o que nossos usuários dizem. Prometemos que não pagamos por esses depoimentos — apenas fornecemos piadas excelentes.
+      </p>
+    </div>
+
+    <div class="depoimentos-grid">
+
+      <article class="depoimento-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">
+          Eu costumava ser aquela pessoa que morria das próprias piadas antes de terminar de contar. Agora os outros me batem primeiro. Mudança de vida.
+        </p>
+        <div class="dep-user">
+          <div class="dep-avatar av-yellow">😄</div>
+          <div>
+            <div class="dep-name">._.s (não me confunda com meu pai)</div>
+            <div class="dep-role">Gerente dos"frutos do rio de et • almoçado da silva</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="depoimento-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">
+          Comecei a eliminar sua familia ontem mas parei pra ver as piadas do grupo"os mais ya g da cidade de apple 500 pro max"
+        </p>
+        <div class="dep-user">
+          <div class="dep-avatar av-orange">🤓</div>
+          <div>
+            <div class="dep-name">que te viu atras do armario</div>
+            <div class="dep-role">Analista de suas roupas....não queira saber quais • sua casa</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 🔧 CARD CORRIGIDO -->
+      <article class="depoimento-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">
+          Mandei uma piada gerada pelo PiadaTop para meu crush. Ele mandou um "usando IA que feio seu beta" com 6 k's... e agora ele ri de mim na rua. Obrigado, PiadaTop.
+        </p>
+        <div class="dep-user">
+          <div class="dep-avatar av-pink">😍</div>
+          <div>
+            <div class="dep-name">Alice no País das Guloseimas</div>
+            <div class="dep-role">Estudante • lugar duvidoso</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="depoimento-card">
+        <div class="dep-stars">★★★★☆</div>
+        <p class="dep-text">
+          Quase dei 4 estrelas porque ri tanto que derrubei o café no teclado. Novo teclado: R$1500 spsadsaaa mil. Mas consegui dar uma estrela que era o que eu queria.
+        </p>
+        <div class="dep-user">
+          <div class="dep-avatar av-blue">☕</div>
+          <div>
+            <div class="dep-name">branca de neve e os cinco negros</div>
+            <div class="dep-role">sem trabalho como você • rj dos cria favelanos mandraques do roblox</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="depoimento-card">
+        <div class="dep-stars">★★★★★ mil</div>
+        <p class="dep-text">
+          Sou favelano mandraque e traficane no roblox por culpa do felca e do seu namorado o trump e uso as piadas como drogas
+        </p>
+        <div class="dep-user">
+          <div class="dep-avatar av-purple">📚</div>
+          <div>
+            <div class="dep-name">lula do x</div>
+            <div class="dep-role">clt no roblox mas sem o chat sem robux e traido pela sou_macho_seu_burro123453212242 • rj</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="depoimento-card">
+        <div class="dep-stars">★★★★★★★★★★★★★★★★</div>
+        <p class="dep-text">
+          Tentei competir com a ia pra ver quem mata mais mendigos barbudos e ela ganhou por que agora 99,9% estão sumidossss. 😎
+        </p>
+        <div class="dep-user">
+          <div class="dep-avatar av-green">🎭</div>
+          <div>
+            <div class="dep-name">Amanda Lima</div>
+            <div class="dep-role">Criadora de Conteúdo • Florianópolis</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOCIAL ─── -->
+<section id="social">
+  <div class="container" style="text-align:center;">
+    <span class="section-tag" style="background:rgba(255,255,255,.25); color:#fff;">📲 Redes Sociais</span>
+    <h2 class="section-title" style="margin-top:12px;">Espalhe o riso. Seja o motivo de rir do grupo.</h2>
+    <p class="section-sub" style="margin:0 auto 40px;">Siga o PiadaTop e receba piadas frescas todo dia. Seus seguidores vão agradecer (ou pelo menos não vão bloquear você).</p>
+    <div class="social-icons">
+      <a href="#" class="social-btn"><span class="social-icon">📸</span>@piadatop</a>
+      <a href="#" class="social-btn"><span class="social-icon">🎵</span>@piadatop</a>
+      <a href="#" class="social-btn"><span class="social-icon">🐦</span>@piadatop</a>
+      <a href="#" class="social-btn"><span class="social-icon">💼</span>PiadaTop</a>
+      <a href="#" class="social-btn"><span class="social-icon">▶️</span>PiadaTop</a>
+    </div>
+    <div class="viral-tag">🔥 Use #PiadaTop e apareça nas nossas stories!</div>
+  </div>
+</section>
+
+<!-- ─── CONTATO + FORMULÁRIO ─── -->
+<section id="contato">
+  <div class="container">
+    <div class="contato-inner">
+      <div>
+        <span class="section-tag">📬 Contato</span>
+        <h2 class="section-title">Fale com a gente. Prometemos responder sem piadas ruins.</h2>
+        <p class="section-sub">Suporte rápido, amigável e — claro — com bom humor. Estamos aqui para ajudar (e eventualmente contar uma piada).</p>
+        <div class="contato-info">
+          <div class="contato-item">
+            <div class="contato-ico">📧</div>
+            <div><strong>E-mail</strong><span>oi@piadatop.com.br</span></div>
+          </div>
+          <div class="contato-item">
+            <div class="contato-ico" style="background:#D4F4FF;">📞</div>
+            <div><strong>Telefone / WhatsApp</strong><span>(11) 99999-8765</span></div>
+          </div>
+          <div class="contato-item">
+            <div class="contato-ico" style="background:#FFD6ED;">⏰</div>
+            <div><strong>Horário de Atendimento</strong><span>Seg–Sex, das 9h às 18h<br><em>Aos sábados respondemos se a piada for boa o suficiente.</em></span></div>
+          </div>
+          <div class="contato-item">
+            <div class="contato-ico" style="background:#EFE0FF;">📍</div>
+            <div><strong>Endereço</strong><span>Av. do Humor, 404 — Não Encontrado 😂<br>São Paulo – SP</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>Quero piadas incríveis! 🎉</h3>
+        <p>Deixe seus dados e nossa equipe entra em contato. Primeira piada gratuita, sem pegadinha.</p>
+        <form onsubmit="return false;">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Seu Nome 👤</label>
+              <input type="text" placeholder="Como te chamam por aí?"/>
+            </div>
+            <div class="form-group">
+              <label>E-mail 📧</label>
+              <input type="email" placeholder="seuemail@exemplo.com"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Telefone / WhatsApp 📱</label>
+            <input type="tel" placeholder="(00) 00000-0000"/>
+          </div>
+          <div class="form-group">
+            <label>Estilo de humor favorito 🎭</label>
+            <input type="text" placeholder="Ex: Absurdo, inteligente, nerd, cotidiano..."/>
+          </div>
+          <div class="form-group">
+            <label>Mensagem 💬</label>
+            <textarea placeholder="Conta pra gente o que você precisa — ou conta uma piada. Ficamos quites."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">😂 Quero Receber Piadas Incríveis Agora!</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">Piada<span>Top</span> 😂</div>
+    <p>Feito com humor, café e uma IA que nunca dorme — porque ela tem piadas demais para contar.</p>
+    <p style="margin-top:12px;">© 2025 PiadaTop. Todos os direitos reservados. Piadas ruins, não.</p>
+  </div>
+</footer>
+
+</body>
+</html>
